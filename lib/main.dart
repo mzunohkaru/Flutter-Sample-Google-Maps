@@ -69,6 +69,7 @@ class MapSampleState extends State<MapSample> {
                   _settingModalBottomSheet(context);
                 });
               }),
+          // 追加-----------------------------
           _kKanagawaMarker
         },
         initialCameraPosition: _kGooglePlex,
