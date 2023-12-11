@@ -19,15 +19,17 @@ dependencies:
 
 
 
-  google_maps_flutter: ^2.5.0
+  google_maps_flutter:
 
-  location: ^5.0.3
+  location:
 
-  flutter_polyline_points: ^2.0.0
+  flutter_polyline_points:
 
   # flutter_google_places: ^0.3.0
 
-  url_launcher: ^6.2.1
+  url_launcher:
+
+  flutter_speed_dial:
 
 
 
