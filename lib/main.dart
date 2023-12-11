@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_sample/pages/location_tracking_page.dart';
+import 'package:google_maps_sample/pages/home_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Google Maps Demo',
-      home: LocationTracking(),
+      home: HomePage(),
     );
   }
 }

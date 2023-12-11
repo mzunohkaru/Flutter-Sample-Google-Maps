@@ -104,7 +104,7 @@ class _LocationTrackingState extends State<LocationTracking> {
           }),
     );
 
-    // setPolylinesInMap();
+    setPolylinesInMap();
   }
 
   // 出発地点から目的地までの経路（ポリライン）をマップ上に表示
@@ -117,16 +117,16 @@ class _LocationTrackingState extends State<LocationTracking> {
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach((pointLatLng) {
+      for (var pointLatLng in result.points) {
         polylineCoordinates
             .add(LatLng(pointLatLng.latitude, pointLatLng.longitude));
-      });
+      }
     }
 
     setState(() {
       _polylines.add(Polyline(
         width: 5,
-        polylineId: PolylineId('polyline'),
+        polylineId: const PolylineId('polyline'),
         color: Colors.blueAccent,
         points: polylineCoordinates,
       ));
@@ -197,76 +197,76 @@ class _LocationTrackingState extends State<LocationTracking> {
     );
   }
 
-  SpeedDial buildFloatingActionButton() {
+  Widget buildFloatingActionButton() {
     return SpeedDial(
-        icon: Icons.add,
-        activeIcon: Icons.close,
-        spacing: 3,
-        mini: false,
-        openCloseDial: ValueNotifier<bool>(false),
-        childPadding: const EdgeInsets.all(5),
-        spaceBetweenChildren: 4,
-        buttonSize: const Size(56.0, 56.0),
-        label: const Text("Open"),
-        activeLabel: const Text("Close"),
-        childrenButtonSize: const Size(56.0, 56.0),
-        visible: true,
-        direction: SpeedDialDirection.down,
-        switchLabelPosition: false,
-        closeManually: false,
-        renderOverlay: true,
-        useRotationAnimation: true,
-        elevation: 8.0,
-        animationCurve: Curves.elasticInOut,
-        isOpenOnStart: false,
-        shape: const StadiumBorder(),
-        children: [
-          SpeedDialChild(
-            child: const Icon(Icons.satellite_alt_outlined),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            label: '衛星',
-            onTap: () {
-              setState(() {
-                m = MapType.satellite;
-              });
-            },
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.map_outlined),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            label: 'ノーマル',
-            onTap: () {
-              setState(() {
-                m = MapType.normal;
-              });
-            },
-          ),
-           SpeedDialChild(
-            child: const Icon(Icons.terrain_outlined),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            label: '地形',
-            onTap: () {
-              setState(() {
-                m = MapType.terrain;
-              });
-            },
-          ),
-           SpeedDialChild(
-            child: const Icon(Icons.eco_sharp),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            label: 'ハイブリッド',
-            onTap: () {
-              setState(() {
-                m = MapType.hybrid;
-              });
-            },
-          ),
-        ],
-      );
+      icon: Icons.add,
+      activeIcon: Icons.close,
+      spacing: 3,
+      mini: false,
+      openCloseDial: ValueNotifier<bool>(false),
+      childPadding: const EdgeInsets.all(5),
+      spaceBetweenChildren: 4,
+      buttonSize: const Size(56.0, 56.0),
+      label: const Text("Open"),
+      activeLabel: const Text("Close"),
+      childrenButtonSize: const Size(56.0, 56.0),
+      visible: true,
+      direction: SpeedDialDirection.down,
+      switchLabelPosition: false,
+      closeManually: false,
+      renderOverlay: true,
+      useRotationAnimation: true,
+      elevation: 8.0,
+      animationCurve: Curves.elasticInOut,
+      isOpenOnStart: false,
+      shape: const StadiumBorder(),
+      children: [
+        SpeedDialChild(
+          child: const Icon(Icons.satellite_alt_outlined),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          label: '衛星',
+          onTap: () {
+            setState(() {
+              m = MapType.satellite;
+            });
+          },
+        ),
+        SpeedDialChild(
+          child: const Icon(Icons.map_outlined),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          label: 'ノーマル',
+          onTap: () {
+            setState(() {
+              m = MapType.normal;
+            });
+          },
+        ),
+        SpeedDialChild(
+          child: const Icon(Icons.terrain_outlined),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          label: '地形',
+          onTap: () {
+            setState(() {
+              m = MapType.terrain;
+            });
+          },
+        ),
+        SpeedDialChild(
+          child: const Icon(Icons.eco_sharp),
+          backgroundColor: Colors.red,
+          foregroundColor: Colors.white,
+          label: 'ハイブリッド',
+          onTap: () {
+            setState(() {
+              m = MapType.hybrid;
+            });
+          },
+        ),
+      ],
+    );
   }
 
   @override

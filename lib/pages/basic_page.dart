@@ -11,7 +11,7 @@ class BasicMapPage extends StatefulWidget {
 }
 
 class _BasicMapPageState extends State<BasicMapPage> {
-   final Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
 
   final CameraPosition cpSinjyuku = const CameraPosition(
     target: LatLng(35.68944, 139.69167),
@@ -29,11 +29,11 @@ class _BasicMapPageState extends State<BasicMapPage> {
     final Marker SinjyukuMarker = Marker(
         markerId: const MarkerId("_sinjyuku"),
         infoWindow: const InfoWindow(title: "東京 新宿"),
-        icon: BitmapDescriptor.defaultMarker,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         position: const LatLng(35.68944, 139.69167),
         onTap: () {
           setState(() {
-            _showSnackBar(context);
+            _showSnackBar(context, 'マーカーがタップされました');
           });
         });
 
@@ -44,7 +44,19 @@ class _BasicMapPageState extends State<BasicMapPage> {
         position: const LatLng(35.7277503, 139.7108977),
         onTap: () {
           setState(() {
-            _showSnackBar(context);
+            _showSnackBar(context, 'マーカーがタップされました');
+          });
+        });
+
+    final Polyline sinjyukuToIkebukuro = Polyline(
+        polylineId: const PolylineId("_sinjyuku_to_ikebukuro"),
+        color: Colors.red,
+        points: [SinjyukuMarker.position, IkebukuroMarker.position],
+        width: 2,
+        consumeTapEvents: true,
+        onTap: () {
+          setState(() {
+            _showSnackBar(context, 'ポリラインがタップされました');
           });
         });
 
@@ -62,6 +74,7 @@ class _BasicMapPageState extends State<BasicMapPage> {
       body: GoogleMap(
         mapType: MapType.normal,
         markers: {SinjyukuMarker, IkebukuroMarker},
+        polylines: {sinjyukuToIkebukuro},
         initialCameraPosition: cpSinjyuku,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
@@ -83,10 +96,10 @@ class _BasicMapPageState extends State<BasicMapPage> {
     controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
   }
 
-  void _showSnackBar(context) {
+  void _showSnackBar(BuildContext context, String title) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('ピンがタップされました'),
+      SnackBar(
+        content: Text(title),
       ),
     );
   }
